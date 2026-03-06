@@ -15,7 +15,7 @@ class Unauthorised extends BaseController
         $data['js'] = ['unauthorised'];
         // Array of CSS files to include
         $data['css'] = ['unauthorised'];
-        $data['title'] = 'Unauthorised';
+        $data['title'] = 'Access Denied';
         // Return login form view
         return $this->response->setStatusCode(403)->setBody(view('unauthorised', $data));
     }
