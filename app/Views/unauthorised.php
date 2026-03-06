@@ -23,7 +23,7 @@
     <body class="">
         <main class="unauthorised-wrap">
             <div class="unauthorised-content text-center">
-                <img src="/assets/img/unauthorised.svg" alt="" class="unauthorised-img" aria-hidden="true">
+                <img src="/assets/img/skull.svg" alt="" class="unauthorised-img" aria-hidden="true">
                 <h1 class="glitch fw-bold" data-text="Access Denied">Access Denied</h1>
                 <p class="lead unauthorised-lead">You do not have permission to view this page.</p>
 
