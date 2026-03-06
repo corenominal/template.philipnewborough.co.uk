@@ -1,17 +1,32 @@
 /* ─── CRT scan lines overlay ─── */
+@keyframes scanMove {
+    from { background-position: 0 0; }
+    to   { background-position: 0 100vh; }
+}
+
 body::before {
     content: '';
     position: fixed;
     inset: 0;
+    /* line thickness scales with viewport: clamp between 3px and 5px */
     background: repeating-linear-gradient(
         to bottom,
         transparent 0,
-        transparent 3px,
-        rgba(0, 0, 0, 0.10) 3px,
-        rgba(0, 0, 0, 0.10) 4px
+        transparent clamp(3px, 0.4vh, 5px),
+        rgba(255, 255, 255, 0.12) clamp(3px, 0.4vh, 5px),
+        rgba(255, 255, 255, 0.12) clamp(4px, 0.55vh, 6px)
     );
+    background-size: 100% clamp(4px, 0.55vh, 6px);
+    animation: scanMove 8s linear infinite;
     pointer-events: none;
     z-index: 9999;
+}
+
+/* Slow down on devices that prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation-duration: 24s;
+    }
 }
 
 /* ─── Layout ─── */
