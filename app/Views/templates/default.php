@@ -47,12 +47,8 @@
                 </a>
 
                 <div>
-                    <button class="btn btn-outline-primary btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Toggle sidebar">
-                        <i class="bi bi-layout-sidebar"></i> <span class="d-none d-sm-inline">Menu</span>
-                    </button>
-
                     <button class="btn btn-outline-primary btn d-lg-none me-3" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-three-dots"></i> <span class="d-none d-sm-inline">More</span>
+                        <i class="bi bi-three-dots-vertical"></i> <span class="d-none d-sm-inline">Menu</span>
                     </button>
                 </div>
 
