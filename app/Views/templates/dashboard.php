@@ -82,7 +82,7 @@
                         </li>
                         <?php else: ?>
                         <li class="nav-item topnav-item">
-                            <a class="nav-link text-white-50 py-3 py-lg-0 px-3" href="<?= config('Urls')->auth ?>login"><i class="bi bi-box-arrow-in-right me-1"></i><span class="d-lg-none"> Login</span></a>
+                            <a class="nav-link text-white-50 py-3 py-lg-0 px-3" href="<?= config('Urls')->auth ?>login?redirect=<?= urlencode(current_url()) ?>"><i class="bi bi-box-arrow-in-right me-1"></i><span class="d-lg-none"> Login</span></a>
                         </li>
                         <?php endif; ?>
                     </ul>
