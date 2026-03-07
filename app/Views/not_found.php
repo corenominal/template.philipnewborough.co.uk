@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="/assets/css/<?= $file ?>.css<?= file_exists($cssPath) ? '?v=' . filemtime($cssPath) : '' ?>">
         <?php endforeach; endif; ?>
         <!-- JavaScript -->
-        <script src="<?= config('Urls')->assets ?>assets/js/vendor/bootstrap.bundle.min.js"></script>
+        <script defer src="<?= config('Urls')->assets ?>assets/js/vendor/bootstrap.bundle.min.js"></script>
         <?php if(isset($js)): foreach ($js as $file): $jsPath = FCPATH . 'assets/js/' . $file . '.js'; ?>
         <script defer src="/assets/js/<?= $file ?>.js<?= file_exists($jsPath) ? '?v=' . filemtime($jsPath) : '' ?>"></script>
         <?php endforeach; endif; ?>
