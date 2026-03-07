@@ -110,6 +110,9 @@
                             </li>
                         </ul>
 
+                        <?php // is_admin session is set and true
+                        if( session()->get('is_admin') ):
+                        ?>
                         <p class="px-3 mb-1 text-uppercase fw-semibold text-secondary sidebar-section-label">Admin</p>
                         <ul class="nav flex-column mb-3">
                             <li class="nav-item">
@@ -118,6 +121,7 @@
                                 </a>
                             </li>
                         </ul>
+                        <?php endif; ?>
 
                     </nav>
 
