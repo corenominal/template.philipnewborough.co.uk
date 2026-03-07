@@ -6,6 +6,7 @@ use App\Filters\AdminFilter;
 use App\Filters\DebugFilter;
 use App\Filters\ApiFilter;
 use App\Filters\AuthFilter;
+use App\Filters\OptionalAuthFilter;
 use CodeIgniter\Config\Filters as BaseFilters;
 use CodeIgniter\Filters\Cors;
 use CodeIgniter\Filters\CSRF;
@@ -20,6 +21,25 @@ use CodeIgniter\Filters\SecureHeaders;
 class Filters extends BaseFilters
 {
     /**
+     * Routes excluded from the auth filter.
+     * Keep in sync with OPTIONAL_AUTH_ROUTES if public-facing routes are added.
+     */
+    private const AUTH_EXCEPTIONS = [
+        '/',
+        'cli/*',
+        'api/*',
+        'unauthorised',
+    ];
+
+    /**
+     * Public-facing routes that should still attempt to hydrate the session
+     * if cookies are present.
+     */
+    private const OPTIONAL_AUTH_ROUTES = [
+        '/',
+    ];
+
+    /**
      * Configures aliases for Filter classes to
      * make reading things nicer and simpler.
      *
@@ -29,10 +49,11 @@ class Filters extends BaseFilters
      * or [filter_name => [classname1, classname2, ...]]
      */
     public array $aliases = [
-        'adminfilter'   => AdminFilter::class,
-        'debugfilter'   => DebugFilter::class,
-        'apifilter'     => ApiFilter::class,
-        'authfilter'    => AuthFilter::class,
+        'adminfilter'        => AdminFilter::class,
+        'debugfilter'        => DebugFilter::class,
+        'apifilter'          => ApiFilter::class,
+        'authfilter'         => AuthFilter::class,
+        'optionalauthfilter' => OptionalAuthFilter::class,
         'csrf'          => CSRF::class,
         'toolbar'       => DebugToolbar::class,
         'honeypot'      => Honeypot::class,
@@ -83,13 +104,7 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
-            'authfilter' => ['except' => [
-                '/',
-                'cli/*',
-                'api/*',
-                'unauthorised',
-                ],
-            ],
+            'authfilter' => ['except' => self::AUTH_EXCEPTIONS],
         ],
         'after' => [
             // 'honeypot',
@@ -122,8 +137,9 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
-        'apifilter' => ['before' => ['api/*', 'api']],
-        'debugfilter' => ['before' => ['debug/*', 'debug']],
-        'adminfilter' => ['before' => ['admin/*', 'admin']],
+        'optionalauthfilter' => ['before' => self::OPTIONAL_AUTH_ROUTES],
+        'apifilter'          => ['before' => ['api/*', 'api']],
+        'debugfilter'        => ['before' => ['debug/*', 'debug']],
+        'adminfilter'        => ['before' => ['admin/*', 'admin']],
     ];
 }
