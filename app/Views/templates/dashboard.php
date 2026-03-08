@@ -23,6 +23,7 @@
         <script defer src="<?= config('Urls')->assets ?>assets/js/vendor/bootstrap.bundle.min.js"></script>
         <script defer src="<?= config('Urls')->assets ?>assets/js/shared/logout.js"></script>
         <script defer src="<?= config('Urls')->assets ?>assets/js/shared/appmenu.js"></script>
+        <script defer src="<?= config('Urls')->assets ?>assets/js/shared/notifications.js"></script>
         <?php if(isset($datatables) && $datatables): ?>
         <script defer src="<?= config('Urls')->assets ?>assets/js/vendor/jquery.min.js"></script>
         <script defer src="<?= config('Urls')->assets ?>assets/js/vendor/datatables.min.js"></script>
