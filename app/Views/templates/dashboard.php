@@ -81,11 +81,11 @@
                             <a class="nav-link text-white-50 py-3 py-lg-0 px-3 trigger-notifications" href="#"><i id="notification-bell" class="bi bi-bell-fill me-1"></i><span class="d-lg-none"> Notifications</span></a>
                         </li>
                         <li class="nav-item topnav-item">
-                            <a class="nav-link text-white-50 py-3 py-lg-0 px-3 trigger-logout" href="#"><i class="bi bi-box-arrow-right me-1"></i><span class="d-lg-none"> Logout</span></a>
+                            <a class="nav-link text-white-50 py-3 py-lg-0 px-3 trigger-logout" href="#"><i class="bi bi-box-arrow-right me-1"></i> Logout</a>
                         </li>
                         <?php else: ?>
                         <li class="nav-item topnav-item">
-                            <a class="nav-link text-white-50 py-3 py-lg-0 px-3" href="<?= config('Urls')->auth ?>login?redirect=<?= urlencode(current_url()) ?>"><i class="bi bi-box-arrow-in-right me-1"></i><span class="d-lg-none"> Login</span></a>
+                            <a class="nav-link text-white-50 py-3 py-lg-0 px-3" href="<?= config('Urls')->auth ?>login?redirect=<?= urlencode(current_url()) ?>"><i class="bi bi-box-arrow-in-right me-1"></i> Login</a>
                         </li>
                         <?php endif; ?>
                     </ul>
