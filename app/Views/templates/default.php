@@ -109,6 +109,12 @@
                 <!-- FOOTER -->
                 <footer class="border-top py-4 px-3 mx-4 text-center">
                     <span class="text-secondary"><span class="flip-horizontal">&copy;</span> <?= date('Y') ?> Philip Newborough. All rights reserved. <a href="<?= config('Urls')->license ?>">License</a>.</span>
+                    <?php // is_admin session is set and true
+                    if( session()->get('is_admin') ):
+                    ?>
+                    <br>
+                    <span class="text-secondary"><strong>Hostname:</strong> <?= gethostname() ?> | <strong>PHP version:</strong> <?= phpversion() ?>.</span>
+                    <?php endif; ?>
                 </footer>
                 <!-- /FOOTER -->
             </div>

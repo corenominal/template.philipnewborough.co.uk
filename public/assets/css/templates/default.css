@@ -1,3 +1,7 @@
+#main ~ footer {
+    font-size: .8rem;
+}
+
 .topnav-item:first-child,
 .topnav-item + .topnav-item {
     border-top: 1px solid var(--bs-border-color);
