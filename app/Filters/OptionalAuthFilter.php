@@ -28,8 +28,14 @@ class OptionalAuthFilter implements FilterInterface
         $user_uuid = get_cookie('user_uuid');
         $token     = get_cookie('token');
 
-        // No cookies — nothing to do, just continue
+        // No cookies
         if (!$user_uuid || !$token) {
+            // If session is populated but cookies are gone, clear the session immediately.
+            // session->destroy() only removes storage; remove() also clears $_SESSION for this request.
+            if ($session->get('user_uuid') && $session->get('token')) {
+                $session->remove(['id', 'user_uuid', 'username', 'email', 'realname', 'created_at', 'token', 'is_admin', 'groups']);
+                $session->destroy();
+            }
             return;
         }
 
