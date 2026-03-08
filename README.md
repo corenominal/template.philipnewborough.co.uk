@@ -1,69 +1,76 @@
-# CodeIgniter 4 Application Starter
+# template.philipnewborough.co.uk
 
-## What is CodeIgniter?
+A CodeIgniter 4 starter template providing a structured foundation for web applications that require a public-facing site, an authenticated admin dashboard, a RESTful API, and CLI tooling.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Stack
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+- **PHP 8.2+** with CodeIgniter 4.7+
+- **MySQL** (SQLite3 and PostgreSQL configs also available)
+- **Bootstrap 5** (dark theme) with Bootstrap Icons
+- **DataTables** (admin panel)
+- **jQuery**
+- **ESLint** for JavaScript linting
+- **PHPUnit 10** for testing
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Features
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### Authentication
+Authentication is delegated to an external centralised auth server. Session tokens stored in cookies (`user_uuid`, `token`) are validated via cURL on each request. On success, the session is populated with user data (id, username, email, groups, `is_admin` flag).
 
-## Installation & updates
+Five request filters handle access control:
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+| Filter | Purpose |
+|---|---|
+| `AuthFilter` | Enforces authentication; redirects unauthenticated users to the external login page |
+| `OptionalAuthFilter` | Attempts to hydrate the session on public routes without redirecting |
+| `AdminFilter` | Restricts routes to users with the `is_admin` flag |
+| `ApiFilter` | Validates API key and user UUID headers; handles CORS preflight |
+| `DebugFilter` | Restricts debug routes to admin users |
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+### Routing
+
+| Route | Handler | Access |
+|---|---|---|
+| `GET /` | `Home::index` | Public (optional auth) |
+| `GET /admin` | `Admin\Home::index` | Admin only |
+| `GET /api/test/ping` | `Api\Test::ping` | API key required |
+| `GET /logout` | `Auth::logout` | Authenticated |
+| `GET /unauthorised` | `Unauthorised::index` | Public |
+| `cli/test/index/:name` | `CLI\Test::index` | CLI only |
+| `cli/test/count` | `CLI\Test::count` | CLI only |
+
+### Admin Panel
+The `/admin` dashboard requires admin authentication and includes a DataTables-powered data table with Bootstrap 5 styling, a responsive offcanvas sidebar, and conditional navigation.
+
+### API
+All routes under `/api/*` are protected by the `ApiFilter`. Authentication is header-based (`apikey`, `user-uuid`). A master API key can bypass per-user validation. Responses are JSON. CORS is open (`*`) with support for `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, and `OPTIONS`.
+
+### Frontend Assets
+Assets live in `public/assets/` and are organised by template, page, and vendor. Cache busting is handled via `filemtime()` query strings. JavaScript follows ES6+ conventions enforced by ESLint.
+
+### Testing
+Tests are located in `tests/` and run with PHPUnit via `composer test`. Includes unit, database, and session test examples.
 
 ## Setup
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+1. Copy `env` to `.env` and configure your environment variables (database credentials, base URL, API keys, auth server URLs).
+2. Install PHP dependencies: `composer install`
+3. Install JS dependencies: `npm install`
+4. Run migrations: `php spark migrate`
+5. Run tests: `composer test`
 
-## Important Change with index.php
+## Directory Structure
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 8.2 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+```
+app/
+  Config/       Application configuration
+  Controllers/  HTTP, Admin, API, CLI, and Debug controllers
+  Filters/      Request filters (auth, admin, API, debug)
+  Libraries/    Custom libraries (Sendmail)
+  Models/       (empty — add your own)
+  Database/     Migrations and seeds
+  Views/        Templates and page views
+public/
+  assets/       CSS, JS, and vendor assets
+tests/          PHPUnit tests
+```
