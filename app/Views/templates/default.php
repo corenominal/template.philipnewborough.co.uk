@@ -78,8 +78,11 @@
                             <a class="nav-link text-white-50 py-3 py-lg-0 px-3" href="/admin"><i class="bi bi-shield-lock-fill me-1"></i> Admin</a>
                         </li>
                         <?php endif; ?>
-                        <?php // If user_uuid session is set, show logout link, otherwise show login link
+                        <?php // If user_uuid session is set, show notification bell and logout link, otherwise show login link
                         if( session()->get('user_uuid') ): ?>
+                        <li class="nav-item topnav-item">
+                            <a class="nav-link text-white-50 py-3 py-lg-0 px-3 trigger-notifications" href="#"><i id="notification-bell" class="bi bi-bell-fill me-1"></i><span class="d-lg-none"> Notifications</span></a>
+                        </li>
                         <li class="nav-item topnav-item">
                             <a class="nav-link text-white-50 py-3 py-lg-0 px-3 trigger-logout" href="#"><i class="bi bi-box-arrow-right me-1"></i><span class="d-lg-none"> Logout</span></a>
                         </li>

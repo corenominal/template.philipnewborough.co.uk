@@ -75,8 +75,11 @@
                             <a class="nav-link text-white-50 py-3 py-lg-0 px-3 trigger-appmenu" href="#"><i class="bi bi-grid-3x3-gap-fill me-1"></i> App Menu</a>
                         </li>
                         <?php endif; ?>
-                        <?php // If user_uuid session is set, show logout link, otherwise show login link
+                        <?php // If user_uuid session is set, show notification bell and logout link, otherwise show login link
                         if( session()->get('user_uuid') ): ?>
+                        <li class="nav-item topnav-item">
+                            <a class="nav-link text-white-50 py-3 py-lg-0 px-3 trigger-notifications" href="#"><i id="notification-bell" class="bi bi-bell-fill me-1"></i><span class="d-lg-none"> Notifications</span></a>
+                        </li>
                         <li class="nav-item topnav-item">
                             <a class="nav-link text-white-50 py-3 py-lg-0 px-3 trigger-logout" href="#"><i class="bi bi-box-arrow-right me-1"></i><span class="d-lg-none"> Logout</span></a>
                         </li>
@@ -127,6 +130,15 @@
 
                     <div class="border-top py-3">
                         <ul class="nav flex-column">
+                            <?php // is_admin session is set and true
+                            if( session()->get('is_admin') ):
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 text-white-50 px-3 py-2" href="/debug">
+                                    <i class="bi bi-bug"></i> Debug
+                                </a>
+                            </li>
+                            <?php endif; ?>
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 text-white-50 px-3 py-2" target="_blank" href="<?= config('Urls')->github ?>/blob/main/README.md">
                                     <i class="bi bi-file-text-fill"></i> README.md
