@@ -24,3 +24,8 @@ $routes->get('/unauthorised', 'Unauthorised::index');
 
 // Custom 404 route
 $routes->set404Override('App\Controllers\Errors::show404');
+
+// Debug routes
+$routes->get('/debug', 'Debug\Home::index');
+$routes->get('/debug/(:segment)', 'Debug\Rerouter::reroute/$1');
+$routes->get('/debug/(:segment)/(:segment)', 'Debug\Rerouter::reroute/$1/$2');
