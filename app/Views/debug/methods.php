@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12">
 
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="border-bottom border-1 mb-4 pb-2">
                 <h1 class="h2">
                     <a href="/debug"><?= $title ?></a> / <?= $class ?>
                 </h1>
