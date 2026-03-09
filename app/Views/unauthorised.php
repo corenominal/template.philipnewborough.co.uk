@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title><?= esc($title) ?> - <?= esc(config('App')->siteName) ?></title>
+        <meta name="theme-color" content="#282A36">
         <!-- Favicon and touch icons -->
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png">
