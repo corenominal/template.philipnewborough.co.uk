@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
+// Admin routes
 $routes->get('/admin', 'Admin\Home::index');
 
 // API routes
