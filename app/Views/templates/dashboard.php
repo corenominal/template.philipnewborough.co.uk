@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title><?= esc($title) ?> - <?= esc(config('App')->siteName) ?></title>
+        <meta name="theme-color" content="#282A36">
         <!-- Favicon and touch icons -->
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png">
@@ -40,7 +41,7 @@
         <a class="visually-hidden-focusable" href="#main">Skip to main content</a>
 
         <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom sticky-top shadow py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-top sticky-top shadow py-0">
             <div class="container-fluid px-0">
                 <a class="navbar-brand d-flex align-items-center gap-2 ms-3" href="<?= site_url() ?>">
                     <img src="/icon.svg" alt="Logo" width="45" height="45" class="d-inline-block align-text-top rounded-circle my-1">
