@@ -7,7 +7,7 @@ A CodeIgniter 4 starter template providing a structured foundation for web appli
 - **PHP 8.2+** with CodeIgniter 4.7+
 - **MySQL** (SQLite3 and PostgreSQL configs also available)
 - **Bootstrap 5** (dark theme) with Bootstrap Icons
-- **DataTables** (admin panel)
+- **DataTables** (admin panel, server-side via `hermawan/datatables`)
 - **jQuery**
 - **ESLint** for JavaScript linting
 - **PHPUnit 10** for testing
@@ -33,6 +33,7 @@ Five request filters handle access control:
 |---|---|---|
 | `GET /` | `Home::index` | Public (optional auth) |
 | `GET /admin` | `Admin\Home::index` | Admin only |
+| `GET /admin/datatable` | `Admin\Home::datatable` | Admin only |
 | `GET /api/test/ping` | `Api\Test::ping` | API key required |
 | `GET /logout` | `Auth::logout` | Authenticated |
 | `GET /unauthorised` | `Unauthorised::index` | Public |
@@ -40,7 +41,7 @@ Five request filters handle access control:
 | `cli/test/count` | `CLI\Test::count` | CLI only |
 
 ### Admin Panel
-The `/admin` dashboard requires admin authentication and includes a DataTables-powered data table with Bootstrap 5 styling, a responsive offcanvas sidebar, and conditional navigation.
+The `/admin` dashboard requires admin authentication and includes a server-side DataTables-powered data table with Bootstrap 5 styling, a responsive offcanvas sidebar, and conditional navigation. DataTables requests are handled by `Admin\Home::datatable` at `GET /admin/datatable`, which uses [`hermawan/datatables`](https://github.com/hermawan/ci4-datatables) to build the server-side JSON response from a query builder instance. Column output can be customised via `->edit()` callbacks before calling `->toJson(true)`.
 
 ### API
 All routes under `/api/*` are protected by the `ApiFilter`. Authentication is header-based (`apikey`, `user-uuid`). A master API key can bypass per-user validation. Responses are JSON. CORS is open (`*`) with support for `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, and `OPTIONS`.
