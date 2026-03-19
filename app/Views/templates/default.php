@@ -110,7 +110,7 @@
                     <span class="text-secondary">
                         <span class="flip-horizontal">&copy;</span> <?= date('Y') ?> Philip Newborough. All rights reserved.<br>
                         <a class="text-decoration-none me-2" href="<?= config('Urls')->license ?>"><i class="bi bi-file-earmark-text-fill"></i> License</a>
-                        <a class="text-decoration-none" href="<?= config('Urls')->github ?>"><i class="bi bi-github"></i> GitHub</a>
+                        <a class="text-decoration-none me-2" href="<?= config('Urls')->github ?>"><i class="bi bi-github"></i> GitHub</a> <a class="text-decoration-none" href="<?= config('Urls')->github ?>blob/main/README.md"><i class="bi bi-file-text-fill"></i> README</a>
                     </span>
                     <?php // is_admin session is set and true
                     if( session()->get('is_admin') ):
