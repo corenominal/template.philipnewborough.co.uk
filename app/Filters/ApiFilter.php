@@ -99,6 +99,15 @@ class ApiFilter implements FilterInterface
                 // Error response, set flag to false
                 $success = false;
             }
+
+            // Check if the response contains is_admin bool value
+            if(isset($response->is_admin)){
+                // If the user is an admin we need to set a var that will be used in the controllers to allow access to admin routes
+                if($response->is_admin === true){
+                    // Set a global variable that can be accessed in the controllers to allow access to admin routes
+                    $GLOBALS['is_admin'] = true;
+                }
+            }
         }
 
         // Test flag

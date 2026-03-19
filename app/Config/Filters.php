@@ -5,6 +5,7 @@ namespace Config;
 use App\Filters\AdminFilter;
 use App\Filters\DebugFilter;
 use App\Filters\ApiFilter;
+use App\Filters\OptionalApiFilter;
 use App\Filters\AuthFilter;
 use App\Filters\OptionalAuthFilter;
 use CodeIgniter\Config\Filters as BaseFilters;
@@ -52,6 +53,7 @@ class Filters extends BaseFilters
         'adminfilter'        => AdminFilter::class,
         'debugfilter'        => DebugFilter::class,
         'apifilter'          => ApiFilter::class,
+        'optionalapifilter'  => OptionalApiFilter::class,
         'authfilter'         => AuthFilter::class,
         'optionalauthfilter' => OptionalAuthFilter::class,
         'csrf'          => CSRF::class,
@@ -133,12 +135,19 @@ class Filters extends BaseFilters
      *
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
+     * 
+     * If using the optional API filter, be sure to exclude any 
+     * routes that should be public-facing but still attempt to 
+     * hydrate the session if cookies are present, as these will 
+     * be protected by the API filter's authentication checks 
+     * if not excluded.
      *
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
         'optionalauthfilter' => ['before' => self::OPTIONAL_AUTH_ROUTES],
         'apifilter'          => ['before' => ['api/*', 'api']],
+        // 'optionalapifilter'  => ['before' => ['api/items']],
         'debugfilter'        => ['before' => ['debug/*', 'debug']],
         'adminfilter'        => ['before' => ['admin/*', 'admin']],
     ];
