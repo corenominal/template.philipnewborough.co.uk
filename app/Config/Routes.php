@@ -19,6 +19,9 @@ $routes->match(['get', 'options'], '/api/test/ping', 'Api\Test::ping');
 $routes->cli('cli/test/index/(:segment)', 'CLI\Test::index/$1');
 $routes->cli('cli/test/count', 'CLI\Test::count');
 
+// Metrics route
+$routes->post('/metrics/receive', 'Metrics::receive');
+
 // Logout route
 $routes->get('/logout', 'Auth::logout');
 
